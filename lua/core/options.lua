@@ -1,5 +1,6 @@
 vim.o.number = true
 vim.o.relativenumber = true
+-- vim.o.numberwidth = 6
 
 vim.o.splitbelow = true
 vim.o.splitright = true
