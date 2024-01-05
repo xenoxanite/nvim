@@ -2,6 +2,7 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = {
     "nvimtools/none-ls.nvim",
+    "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
     local lspconfig = require("lspconfig")
@@ -34,9 +35,12 @@ return {
       end
     end
 
+    M.capabilities = require("cmp_nvim_lsp").default_capabilities()
+
     lspconfig.nil_ls.setup({})
     lspconfig.clangd.setup({
       on_attach = M.on_attach,
+      capabilities = M.capabilities,
     })
     lspconfig.rust_analyzer.setup({
       on_attach = M.on_attach,
