@@ -4,6 +4,7 @@ return {
   dependencies = {
     "hrsh7th/cmp-buffer", -- source for text in buffer
     "hrsh7th/cmp-path", -- source for file system paths
+    "onsails/lspkind.nvim",
     {
       "L3MON4D3/LuaSnip",
       dependencies = {
@@ -76,7 +77,7 @@ return {
         ghost_text = true, -- this feature conflict with copilot.vim's preview.
       },
 
-      formatting = {
+      --[[ formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(_, item)
           local a = string.rep(" ", 10)
@@ -84,6 +85,17 @@ return {
           item.menu = " " .. item.kind .. " "
           item.kind = " " .. cmp_icons[item.kind] .. " "
           return item
+        end,
+      }, ]]
+
+      formatting = {
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+          local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+          local strings = vim.split(kind.kind, "%s", { trimempty = true })
+          kind.kind = " " .. (strings[1] or "") .. " "
+          kind.menu = "    (" .. (strings[2] or "") .. ")"
+          return kind
         end,
       },
 
