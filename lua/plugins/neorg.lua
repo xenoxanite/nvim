@@ -7,7 +7,13 @@ return {
     require("neorg").setup({
       load = {
         ["core.defaults"] = {},
-        ["core.concealer"] = {},
+        ["core.concealer"] = { config = { icon_preset = "varied" } },
+        ["core.keybinds"] = {
+          config = {
+            -- neorg_leader = " ",
+            default_keybind = true,
+          },
+        },
         ["core.dirman"] = {
           config = {
             workspaces = {

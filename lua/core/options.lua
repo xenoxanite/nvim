@@ -1,23 +1,27 @@
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.o.number = true
+vim.o.relativenumber = true
 
-vim.opt.splitbelow = true
-vim.opt.splitright = true
+vim.o.splitbelow = true
+vim.o.splitright = true
 
-vim.opt.wrap = false
+vim.o.wrap = false
 
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+vim.o.expandtab = true
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
 
-vim.opt.clipboard = "unnamedplus"
+vim.o.clipboard = "unnamedplus"
 
-vim.opt.scrolloff = 999
+vim.o.scrolloff = 999
 
-vim.opt.virtualedit = "block"
+vim.o.virtualedit = "block"
 
-vim.opt.inccommand = "split"
+vim.o.inccommand = "split"
 
-vim.opt.termguicolors = true
+vim.o.termguicolors = true
+vim.o.laststatus = 0
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
