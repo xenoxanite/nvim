@@ -26,10 +26,9 @@ return {
       },
     })
 
-    vim.keymap.set({ "i", "n", "v" }, "<C-f>", "<cmd>lua vim.lsp.buf.format()<CR>") -- refresh file explorer
-
     local M = {}
     M.on_attach = function()
+      vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
       if vim.fn.has("nvim-0.10") == 1 then
         vim.lsp.inlay_hint.enable(0, true)
       end
@@ -44,9 +43,11 @@ return {
     })
     lspconfig.rust_analyzer.setup({
       on_attach = M.on_attach,
+      capabilities = M.capabilities,
     })
     lspconfig.lua_ls.setup({
       on_attach = M.on_attach,
+      capabilities = M.capabilities,
       settings = {
         Lua = {
           diagnostics = {
