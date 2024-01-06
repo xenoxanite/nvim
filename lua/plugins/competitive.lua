@@ -34,7 +34,7 @@ return {
       directory = "/home/fahim/Code/leetcode",
       lang = "cpp",
       arg = "leetcode.nvim",
-      image_support = true,
+      image_support = false,
     },
   },
 }

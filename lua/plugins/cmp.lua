@@ -107,64 +107,32 @@ return {
           select = true,
         }),
         ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.confirm({ select = true })
-            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-            -- that way you will only jump inside the snippet region
-          elseif luasnip.expand_or_jumpable() then
+          if luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
+          elseif cmp.visible() then
+            cmp.confirm({ select = true })
           else
             fallback()
           end
         end, { "i", "s" }),
 
         ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.confirm({ select = true })
-          elseif luasnip.jumpable(-1) then
+          if luasnip.jumpable(-1) then
             luasnip.jump(-1)
+          elseif cmp.visible() then
+            cmp.confirm({ select = true })
           else
             fallback()
           end
         end, { "i", "s" }),
       }),
-      sources = {
-        {
-          name = "codeium",
-          max_item_count = 3,
-        },
-        {
-          name = "nvim_lsp",
-        },
-        {
-          name = "luasnip",
-          max_item_count = 3,
-        },
-
-        { name = "buffer" },
+      sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+      }, {
         { name = "path" },
-      },
-      sorting = {
-        comparators = {
-          cmp.config.compare.locality,
-          cmp.config.compare.recently_used,
-          cmp.config.compare.score,
-          cmp.config.compare.offset,
-          cmp.config.compare.exact,
-          cmp.config.compare.kind,
-          cmp.config.compare.sort_text,
-          cmp.config.compare.length,
-          cmp.config.compare.order,
-        },
-      },
-      matching = {
-        disallow_fuzzy_matching = true,
-        disallow_fullfuzzy_matching = true,
-        disallow_partial_matching = true,
-        disallow_prefix_unmatching = true,
-      },
+        { name = "buffer" },
+      }),
     })
   end,
 }

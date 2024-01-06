@@ -1,6 +1,9 @@
 vim.o.number = true
 vim.o.relativenumber = true
--- vim.o.numberwidth = 6
+vim.o.numberwidth = 2
+
+vim.o.title = false
+vim.o.showmode = false
 
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -13,6 +16,14 @@ vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
 
 vim.o.clipboard = "unnamedplus"
+vim.o.autoread = true
+vim.o.mouse = ""
+vim.o.hlsearch = true
+vim.o.incsearch = true
+vim.o.ignorecase = true
+vim.o.undofile = true
+vim.o.swapfile = false
+vim.o.cursorline = true
 
 vim.o.scrolloff = 999
 
@@ -25,4 +36,3 @@ vim.o.laststatus = 0
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
