@@ -49,6 +49,7 @@ return {
   config = function()
     local cmp = require("cmp")
 
+    local lspkind = require("lspkind")
     local luasnip = require("luasnip")
     local cmp_icons = require("core.icons").cmp
 
@@ -58,6 +59,10 @@ return {
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
+    lspkind.init({
+      preset = "default",
+    })
+
     cmp.setup({
       snippet = {
         expand = function(args)
@@ -65,7 +70,6 @@ return {
         end,
       },
       window = {
-        --        completion = cmp.config.window.bordered(),
         completion = {
           winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
           col_offset = -3,
@@ -76,22 +80,14 @@ return {
       experimental = {
         ghost_text = true, -- this feature conflict with copilot.vim's preview.
       },
-
-      --[[ formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = function(_, item)
-          local a = string.rep(" ", 10)
-          item.abbr = item.abbr .. a
-          item.menu = " " .. item.kind .. " "
-          item.kind = " " .. cmp_icons[item.kind] .. " "
-          return item
-        end,
-      }, ]]
-
       formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
-          local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+          local kind = lspkind.cmp_format({
+            mode = "symbol",
+            maxwidth = 50,
+            symbol_map = cmp_icons,
+          })(entry, vim_item)
           local strings = vim.split(kind.kind, "%s", { trimempty = true })
           kind.kind = " " .. (strings[1] or "") .. " "
           kind.menu = "    (" .. (strings[2] or "") .. ")"
@@ -135,19 +131,40 @@ return {
         end, { "i", "s" }),
       }),
       sources = {
-        { name = "codeium" },
-        { name = "nvim_lsp" },
-        { name = "luasnip" }, -- For luasnip users.
+        {
+          name = "codeium",
+          max_item_count = 3,
+        },
+        {
+          name = "nvim_lsp",
+        },
+        {
+          name = "luasnip",
+          max_item_count = 3,
+        },
+
         { name = "buffer" },
         { name = "path" },
       },
-    --   sources = cmp.config.sources({
-    --     { name = "codeium" },
-    --     { name = "nvim_lsp" },
-    --     { name = "luasnip" }, -- For luasnip users.
-    --     { name = "buffer" },
-    --     { name = "path" },
-    --   }),
+      sorting = {
+        comparators = {
+          cmp.config.compare.locality,
+          cmp.config.compare.recently_used,
+          cmp.config.compare.score,
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        },
+      },
+      matching = {
+        disallow_fuzzy_matching = true,
+        disallow_fullfuzzy_matching = true,
+        disallow_partial_matching = true,
+        disallow_prefix_unmatching = true,
+      },
     })
   end,
 }
