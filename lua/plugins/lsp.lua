@@ -19,6 +19,7 @@ return {
 
         -- Code actions
         null_ls.builtins.code_actions.statix,
+        null_ls.builtins.code_actions.eslint_d,
 
         -- Diagnostic
         null_ls.builtins.diagnostics.statix,
@@ -36,7 +37,10 @@ return {
 
     M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-    lspconfig.nil_ls.setup({})
+    lspconfig.nil_ls.setup({
+      on_attach = M.on_attach,
+      capabilities = M.capabilities,
+    })
     lspconfig.clangd.setup({
       on_attach = M.on_attach,
       capabilities = M.capabilities,
