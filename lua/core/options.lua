@@ -36,3 +36,8 @@ vim.o.laststatus = 0
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+vim.o.foldmethod = "expr"
+-- vim.o.foldclose = "all"
+vim.o.foldlevelstart = 0
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"

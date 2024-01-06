@@ -21,9 +21,9 @@ keymap("n", "<C-h>", ":vertical resize -2<cr>", opts)
 keymap("n", "<C-l>", ":vertical resize +2<cr>", opts)
 
 -- buffer navigation
-keymap("n", "<leader>n", ":bnext<cr>", opts)
-keymap("n", "<leader>p", ":bprevious<cr>", opts)
-keymap("n", "<leader>q", ":bdelete<cr>", opts)
+keymap("n", "<leader>bn", ":bnext<cr>", opts)
+keymap("n", "<leader>bp", ":bprevious<cr>", opts)
+keymap("n", "<leader>bq", ":bdelete<cr>", opts)
 
 -- basic controll
 keymap("n", "<C-s>", ":write<cr>", opts)
