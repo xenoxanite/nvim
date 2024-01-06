@@ -134,13 +134,20 @@ return {
           end
         end, { "i", "s" }),
       }),
-
-      sources = cmp.config.sources({
+      sources = {
+        { name = "codeium" },
         { name = "nvim_lsp" },
         { name = "luasnip" }, -- For luasnip users.
         { name = "buffer" },
         { name = "path" },
-      }),
+      },
+    --   sources = cmp.config.sources({
+    --     { name = "codeium" },
+    --     { name = "nvim_lsp" },
+    --     { name = "luasnip" }, -- For luasnip users.
+    --     { name = "buffer" },
+    --     { name = "path" },
+    --   }),
     })
   end,
 }
