@@ -6,6 +6,23 @@ return {
     "hrsh7th/cmp-path", -- source for file system paths
     "onsails/lspkind.nvim",
     {
+      "chrisgrieser/nvim-scissors",
+      dependencies = "nvim-telescope/telescope.nvim",
+      opts = {
+        snippetDir = vim.fn.stdpath("data") .. "/lazy/friendly-snippets/snippets",
+      },
+      config = function()
+        vim.keymap.set("n", "<leader>se", function()
+          require("scissors").editSnippet()
+        end)
+
+        -- When used in visual mode prefills the selection as body.
+        vim.keymap.set({ "n", "x" }, "<leader>sa", function()
+          require("scissors").addNewSnippet()
+        end)
+      end,
+    },
+    {
       "L3MON4D3/LuaSnip",
       dependencies = {
         "saadparwaiz1/cmp_luasnip",
@@ -19,8 +36,7 @@ return {
         })
 
         require("luasnip.loaders.from_vscode").lazy_load()
-        require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.g.luasnippets_path or "" })
-
+        require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/snippets" })
         vim.api.nvim_create_autocmd("InsertLeave", {
           callback = function()
             if
