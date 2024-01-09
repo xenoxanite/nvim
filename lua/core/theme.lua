@@ -1,1 +1,0 @@
-local theme = require("pkgs.pywal")
