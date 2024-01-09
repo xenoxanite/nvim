@@ -18,6 +18,7 @@ return {
           config = {
             workspaces = {
               notes = "~/notes",
+              college = "~/notes/college",
             },
             default_workspace = "notes",
           },

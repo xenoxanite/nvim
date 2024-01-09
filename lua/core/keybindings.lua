@@ -1,14 +1,21 @@
+local utils = require("core.utils")
 local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
+
+local function map(mode, keys, action, desc)
+  desc = desc or ""
+  local opts = { noremap = true, silent = true, desc = desc }
+  vim.keymap.set(mode, keys, action, opts)
+end
 
 -- normal mode,
 keymap("n", ";", ":", { nowait = true })
 
 -- window navigation
-keymap("n", "<leader>h", "<C-w>h", opts)
-keymap("n", "<leader>j", "<C-w>j", opts)
-keymap("n", "<leader>k", "<C-w>k", opts)
-keymap("n", "<leader>l", "<C-w>l", opts)
+keymap("n", "<leader>wh", "<C-w>h", opts)
+keymap("n", "<leader>wj", "<C-w>j", opts)
+keymap("n", "<leader>wk", "<C-w>k", opts)
+keymap("n", "<leader>wl", "<C-w>l", opts)
 
 -- split window
 keymap("n", "<leader>sh", "<C-w>s", opts)
@@ -31,3 +38,11 @@ keymap("n", "<C-e>", ":Explore<cr>", opts)
 
 -- clear search highlight
 keymap("n", "<leader>nh", ":nohlsearch<cr>", opts)
+
+map("n", "<leader>ih", function()
+  utils.toggle_inlay_hint() -- toggle inlay hint
+end, "Toggle inlay hint")
+
+map("n", "<leader>vr", function()
+  utils.run_vert_command()
+end, "Run a command in vertical terminal")

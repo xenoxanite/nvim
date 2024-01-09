@@ -1,6 +1,6 @@
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.numberwidth = 2
+vim.o.numberwidth = 3
 
 vim.o.title = false
 vim.o.showmode = false
@@ -23,7 +23,7 @@ vim.o.incsearch = true
 vim.o.ignorecase = true
 vim.o.undofile = true
 vim.o.swapfile = false
-vim.o.cursorline = true
+-- vim.o.cursorline = true
 
 vim.o.scrolloff = 999
 
@@ -39,5 +39,6 @@ vim.g.maplocalleader = " "
 
 vim.o.foldmethod = "expr"
 -- vim.o.foldclose = "all"
-vim.o.foldlevelstart = 0
+vim.o.foldlevel = 20
+-- vim.o.foldlevelstart = 0
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
