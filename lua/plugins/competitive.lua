@@ -34,6 +34,15 @@ return {
       directory = "/home/xenoxanite/codes/competitive-programming/leetcode/",
       lang = "cpp",
       arg = "leetcode.nvim",
+      cn = { -- leetcode.cn
+        enabled = false,
+        translator = true,
+        translate_problems = true,
+      },
+      description = {
+        -- show_stats = false,
+      },
+      key = {},
       image_support = false,
     },
   },
