@@ -1,0 +1,1 @@
+local colors = require("pkgs.pywal.colors")
