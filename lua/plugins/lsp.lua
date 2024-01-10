@@ -30,7 +30,7 @@ return {
 
     local M = {}
     M.on_attach = function()
-      vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
+      -- vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
       if vim.fn.has("nvim-0.10") == 1 then
         vim.lsp.inlay_hint.enable(0, true)
       end
@@ -103,6 +103,8 @@ return {
     vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+
+    vim.keymap.set("n", "<C-f>", vim.lsp.buf.format)
 
     -- Keybindings for lsp
     vim.api.nvim_create_autocmd("LspAttach", {

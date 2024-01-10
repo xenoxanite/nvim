@@ -24,7 +24,10 @@ local catppuccin = {
         types = {},
         operators = {},
       },
-      color_overrides = {},
+      color_overrides = {
+        background = "NONE",
+      },
+      term_colors = true,
       custom_highlights = {},
       integrations = {
         cmp = true,
