@@ -1,1 +1,1 @@
-{"bnode":{"body":["class Node {","public:","  int value;","  Node *right;","  Node *left;","  Node(int value) {","    this->value = value, this->right = nullptr, this->left = nullptr;","  }","};"],"prefix":"bnode","filetype":"cpp"},"unstd":{"body":"using namespace std;","prefix":"unstd","filetype":"cpp"}}
+{"start":{"body":["#include <iostream>","using namespace std;","","int main (int argc, char *argv[]) {","  ${1}","  return 0;","}"],"prefix":"start"}}

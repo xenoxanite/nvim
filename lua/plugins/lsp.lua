@@ -36,7 +36,8 @@ return {
       end
     end
 
-    M.capabilities = require("cmp_nvim_lsp").default_capabilities()
+    M.capabilities = vim.lsp.protocol.make_client_capabilities()
+    M.capabilities = require("cmp_nvim_lsp").default_capabilities(M.capabilities)
 
     lspconfig.nil_ls.setup({
       on_attach = M.on_attach,
@@ -98,6 +99,9 @@ return {
 
     vim.diagnostic.config({
       virtual_text = false,
+      signs = true,
+      underline = true,
+      update_in_insert = true,
     })
     vim.o.updatetime = 250
     vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
