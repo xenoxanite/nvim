@@ -98,13 +98,13 @@ return {
     end
 
     vim.diagnostic.config({
-      virtual_text = false,
+      virtual_text = true,
       signs = true,
       underline = true,
       update_in_insert = true,
     })
-    vim.o.updatetime = 250
-    vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
+    -- vim.o.updatetime = 250
+    -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 
