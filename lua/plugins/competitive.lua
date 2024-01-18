@@ -31,7 +31,7 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     opts = {
-      directory = "/home/xenoxanite/codes/competitive-programming/leetcode/",
+      directory = "/home/xenoxanite/Codes/leetcode/",
       lang = "cpp",
       arg = "leetcode.nvim",
       cn = { -- leetcode.cn

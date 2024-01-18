@@ -32,6 +32,12 @@ keymap("n", "<leader>bn", ":bnext<cr>", opts)
 keymap("n", "<leader>bp", ":bprevious<cr>", opts)
 keymap("n", "<leader>bq", ":bdelete<cr>", opts)
 
+-- tab navigation
+keymap("n", "<leader>tn", ":tabnext<cr>", opts)
+keymap("n", "<leader>tp", ":tabprevious<cr>", opts)
+keymap("n", "<leader>tq", ":tabdelete<cr>", opts)
+keymap("n", "<leader>tt", ":tabnew<cr>", opts)
+
 -- basic controll
 keymap("n", "<C-s>", ":write<cr>", opts)
 keymap("n", "<C-e>", ":Explore<cr>", opts)
@@ -39,10 +45,3 @@ keymap("n", "<C-e>", ":Explore<cr>", opts)
 -- clear search highlight
 keymap("n", "<leader>nh", ":nohlsearch<cr>", opts)
 
-map("n", "<leader>ih", function()
-  utils.toggle_inlay_hint() -- toggle inlay hint
-end, "Toggle inlay hint")
-
-map("n", "<leader>vr", function()
-  utils.run_vert_command()
-end, "Run a command in vertical terminal")
