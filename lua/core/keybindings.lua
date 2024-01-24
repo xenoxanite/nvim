@@ -27,16 +27,13 @@ keymap("n", "<C-k>", ":resize -2<cr>", opts)
 keymap("n", "<C-h>", ":vertical resize -2<cr>", opts)
 keymap("n", "<C-l>", ":vertical resize +2<cr>", opts)
 
--- buffer navigation
-keymap("n", "<leader>bn", ":bnext<cr>", opts)
-keymap("n", "<leader>bp", ":bprevious<cr>", opts)
-keymap("n", "<leader>bq", ":bdelete<cr>", opts)
+keymap("n", "<Tab>", ":BufferLineCycleNext<cr>", { noremap = true, silent = true })
+keymap("n", "<S-Tab>", ":BufferLineCyclePrev<cr>", { noremap = true, silent = true })
 
--- tab navigation
-keymap("n", "<leader>tn", ":tabnext<cr>", opts)
-keymap("n", "<leader>tp", ":tabprevious<cr>", opts)
-keymap("n", "<leader>tq", ":tabdelete<cr>", opts)
-keymap("n", "<leader>tt", ":tabnew<cr>", opts)
+-- Indenting
+keymap("v", "<", "<gv", { noremap = true, silent = false })
+keymap("v", ">", ">gv", { noremap = true, silent = false })
+
 
 -- basic controll
 keymap("n", "<C-s>", ":write<cr>", opts)
@@ -44,4 +41,3 @@ keymap("n", "<C-e>", ":Explore<cr>", opts)
 
 -- clear search highlight
 keymap("n", "<leader>nh", ":nohlsearch<cr>", opts)
-

@@ -1,15 +1,19 @@
 return {
-  "akinsho/toggleterm.nvim",
-  version = "*",
-  config = function()
-    require("toggleterm").setup({
-      size = 15,
-      open_mapping = [[<c-\>]],
-      direction = "horizontal",
-    })
-    local keymap = vim.keymap -- for conciseness
-    keymap.set("n", "<C-\\>", ":ToggleTerm<CR>")
-    keymap.set("t", "<C-\\>", "<Cmd>ToggleTerm<CR>")
-    vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
-  end,
+	"akinsho/toggleterm.nvim",
+
+	config = function()
+		local toggleterm = require("toggleterm")
+
+		toggleterm.setup({
+			size = 13,
+			open_mapping = [[<c-\>]],
+			shade_filetypes = {},
+			shade_terminal = true,
+			shading_factor = 1,
+			start_in_insert = true,
+			persist_size = true,
+			direction = "horizontal",
+			autochdir = true,
+		})
+	end,
 }

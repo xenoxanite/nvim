@@ -1,32 +1,16 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    "nvimtools/none-ls.nvim",
+    
     "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
-    local lspconfig = require("lspconfig")
-    local null_ls = require("null-ls")
+		local lspconfig = require("lspconfig")
+		local lspui = require("lspconfig.ui.windows")
+		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-    null_ls.setup({
-      sources = {
-        -- Formatter
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.nixfmt,
-        null_ls.builtins.formatting.rustfmt,
-        null_ls.builtins.formatting.black,
-        null_ls.builtins.formatting.clang_format,
-        null_ls.builtins.formatting.prettier,
+		lspui.default_options.border = "double"
 
-        -- Code actions
-        null_ls.builtins.code_actions.statix,
-        null_ls.builtins.code_actions.eslint_d,
-
-        -- Diagnostic
-        null_ls.builtins.diagnostics.statix,
-        null_ls.builtins.diagnostics.clang_check,
-      },
-    })
 
     local M = {}
     M.on_attach = function()
@@ -86,16 +70,12 @@ return {
       },
     })
 
-    local signs = {
-      { name = "DiagnosticSignError", text = "" },
-      { name = "DiagnosticSignWarn", text = "" },
-      { name = "DiagnosticSignHint", text = "" },
-      { name = "DiagnosticSignInfo", text = "" },
-    }
 
-    for _, sign in ipairs(signs) do
-      vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    end
+		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+		for type, icon in pairs(signs) do
+			local hl = "DiagnosticSign" .. type
+			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+		end
 
     vim.diagnostic.config({
       virtual_text = true,
@@ -107,25 +87,5 @@ return {
     vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-
-    vim.keymap.set("n", "<C-f>", vim.lsp.buf.format)
-
-    -- Keybindings for lsp
-    vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-      callback = function(ev)
-        vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-        local opts = { buffer = ev.buf }
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-        vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-
-        vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
-        vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-        vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-      end,
-    })
   end,
 }
