@@ -20,8 +20,8 @@ keymap("n", "<C-k>", ":resize -2<cr>", opts)
 keymap("n", "<C-h>", ":vertical resize -2<cr>", opts)
 keymap("n", "<C-l>", ":vertical resize +2<cr>", opts)
 
-keymap("n", "<Tab>", ":BufferLineCycleNext<cr>", { noremap = true, silent = true })
-keymap("n", "<S-Tab>", ":BufferLineCyclePrev<cr>", { noremap = true, silent = true })
+keymap("n", "<Tab>", ":bnext<cr>", { noremap = true, silent = true })
+keymap("n", "<S-Tab>", ":bprevious<cr>", { noremap = true, silent = true })
 
 -- Indenting
 keymap("v", "<", "<gv", { noremap = true, silent = false })

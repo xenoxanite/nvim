@@ -27,7 +27,7 @@ vim.o.incsearch = true
 vim.o.ignorecase = true
 vim.o.undofile = true
 vim.o.swapfile = false
--- vim.o.cursorline = true
+vim.o.cursorline = true
 
 vim.o.scrolloff = 999
 
