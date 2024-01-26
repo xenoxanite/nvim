@@ -1,8 +1,9 @@
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.numberwidth = 3
+
 vim.o.pumheight = 10 -- Max items to show in pop up menu
-vim.o.cmdheight = 0 -- Max items to show in command menu
+vim.o.cmdheight = 1 -- Max items to show in command menu
 vim.o.conceallevel = 0 -- For markdown like elements
 
 vim.o.title = false

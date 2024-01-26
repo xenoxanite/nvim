@@ -15,5 +15,9 @@ return {
 			direction = "horizontal",
 			autochdir = true,
 		})
+    local keymap = vim.keymap -- for conciseness
+    keymap.set("n", "<C-\\>", ":ToggleTerm<CR>")
+    keymap.set("t", "<C-\\>", "<Cmd>ToggleTerm<CR>")
+    vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
 	end,
 }

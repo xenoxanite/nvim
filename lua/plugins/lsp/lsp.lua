@@ -6,11 +6,6 @@ return {
   },
   config = function()
 		local lspconfig = require("lspconfig")
-		local lspui = require("lspconfig.ui.windows")
-		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-		lspui.default_options.border = "double"
-
 
     local M = {}
     M.on_attach = function()

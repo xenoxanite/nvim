@@ -10,16 +10,9 @@ end
 
 -- normal mode,
 keymap("n", ";", ":", { nowait = true })
-
+vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
 -- window navigation
-keymap("n", "<leader>wh", "<C-w>h", opts)
-keymap("n", "<leader>wj", "<C-w>j", opts)
-keymap("n", "<leader>wk", "<C-w>k", opts)
-keymap("n", "<leader>wl", "<C-w>l", opts)
 
--- split window
-keymap("n", "<leader>sh", "<C-w>s", opts)
-keymap("n", "<leader>sv", "<C-w>v", opts)
 
 -- window resize
 keymap("n", "<C-j>", ":resize +2<cr>", opts)

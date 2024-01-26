@@ -7,16 +7,6 @@ return {
         testcases_directory = ".testcases",
       })
     end,
-    config = function()
-      local set_keymap = vim.keymap.set
-      set_keymap("n", "<leader>tr", "<cmd>CompetiTest run<CR>")
-      set_keymap("n", "<leader>tu", "<cmd>CompetiTest show_ui<CR>")
-      set_keymap("n", "<leader>trc", "<cmd>CompetiTest receive contest<CR>")
-      set_keymap("n", "<leader>trp", "<cmd>CompetiTest receive problem<CR>")
-      set_keymap("n", "<leader>trt", "<cmd>CompetiTest receive testcases<CR>")
-      set_keymap("n", "<space>ta", "<cmd>CompetiTest add_testcase<CR>")
-      set_keymap("n", "<space>te", ":CompetiTest edit_testcase ")
-    end,
     ft = "cpp",
   },
   {

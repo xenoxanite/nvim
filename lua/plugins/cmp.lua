@@ -91,7 +91,6 @@ return {
           col_offset = -3,
           side_padding = 0,
         },
-        --        documentation = cmp.config.window.bordered(),
       },
       experimental = {
         ghost_text = true, -- this feature conflict with copilot.vim's preview.

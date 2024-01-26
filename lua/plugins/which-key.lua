@@ -1,122 +1,128 @@
 return {
 
-  "folke/which-key.nvim",
-  dependencies = {
-    "akinsho/toggleterm.nvim",
-  },
+	"folke/which-key.nvim",
 
-  config = function()
-    vim.o.timeout = true
-    vim.o.timeoutlen = 300
+	config = function()
+		vim.o.timeout = true
+		vim.o.timeoutlen = 300
 
-    local wk = require("which-key")
-    -- border
-    wk.setup({
-      window = {
-        border = "double",
-      },
-    })
+		local wk = require("which-key")
+		-- border
+		wk.setup({
+			window = {
+				border = "single",
+			},
+		})
 
-    local terminal = require("toggleterm.terminal").Terminal
+		local terminal = require("toggleterm.terminal").Terminal
 
-    local toggle_float = function()
-      local float = terminal:new({ direction = "float" })
-      return float:toggle()
-    end
+		local toggle_lazygit = function()
+			local lazygit = terminal:new({ cmd = "lazygit", direction = "float" })
+			return lazygit:toggle()
+		end
+		-- Keymaps
+		local mappings = {
+			-- Basic Operations
+			q = { ":q<cr>", "Quit File" },
+			Q = { ":q!<cr>", "Force Quit File" },
 
-    local toggle_lazygit = function()
-      local lazygit = terminal:new({ cmd = "lazygit", direction = "float" })
-      return lazygit:toggle()
-    end
+			-- Buffers
+			b = {
+				name = "Buffers",
+				x = { ":bdelete<cr>", "Close Buffer" },
+				n = { ":bnext<cr>", "Next Buffer" },
+				l = { ":blast<cr>", "Last Buffer" },
+			},
 
-    -- Keymaps
-    local mappings = {
-      -- Basic Operations
-      q = { ":q<cr>", "Quit File" },
-      Q = { ":q!<cr>", "Force Quit File" },
-      w = { ":w<cr>", "Save File" },
-      W = { ":w!<cr>", "Force Save File" },
+      -- tabs
+			t = {
+				name = "Tabs",
+				n = { ":tabnext", "Next Tab" },
+				p = { ":tabprevious", "Previous Tab" },
+				x = { ":tabclose", "Close Tab" },
+				c = { ":tabnew", "Create Tab" },
 
-      -- Buffers
-      b = {
-        name = "buffers",
+				l = { toggle_lazygit, "LazyGit" },
+			},
 
-        x = { ":bdelete<cr>", "Close Buffer" },
-        n = { ":bnext<cr>", "Next Buffer" },
-        l = { ":blast<cr>", "Last Buffer" },
-      },
+			-- NvimTree
+			e = {
+				name = "NvimTree",
+				e = { ":NvimTreeToggle<cr>", "Toggle" },
+				f = { ":NvimTreeFocus<cr>", "Focus" },
+				q = { ":NvimTreeClose<cr>", "Close" },
+				c = { ":NvimTreeCollapse<cr>", "Collapse" },
+			},
 
-      t = {
-        name = "Tab",
+			-- Telescope
+			f = {
+				name = "Telescope",
+				f = { ":Telescope find_files theme=ivy<cr>", "Telescope find_files" },
+				w = { ":Telescope current_buffer_fuzzy_find theme=ivy<cr>", "Fuzzy Find in File" },
+				o = { ":Telescope oldfiles theme=ivy<cr>", "Telescope oldfiles" },
+				g = { ":Telescope live_grep theme=ivy<cr>", "Telescope live_grep" },
+				r = { ":Telescope resume theme=ivy<cr>", "Telescope resume" },
+				b = { ":Telescope buffers theme=ivy<cr>", "Telescope buffers" },
+			},
 
-        n = { ":tabnext", "Next Tab" },
-        p = { ":tabprevious", "Previous Tab" },
-        x = { ":tabclose", "Close Tab" },
-        c = { ":tabnew", "Create Tab" },
+			-- Competitest
+			c = {
+				name = "Competitest",
+				t = { "<cmd>CompetiTest run<cr>", "Test" },
+				u = { "<cmd>CompetiTest show_ui<cr>", "Show ui" },
+				a = { "<cmd>CompetiTest add_testcase<cr>", "Add testcase" },
+				e = { ":CompetiTest edit_testcase ", "Edit testcase" },
+				r = {
+					name = "Recieve",
+					c = { "<cmd>CompetiTest receive contest<cr>", "Contest" },
+					p = { "<cmd>CompetiTest receive problem<cr>", "Problem" },
+					t = { "<cmd>CompetiTest receive testcases<cr>", "Testcases" },
+				},
+			},
 
-        -- terminal
-        t = { ":ToggleTerm<cr>", "Split Below" },
-        f = { toggle_float, "Floating Terminal" },
-        l = { toggle_lazygit, "LazyGit" },
-      },
+			-- window
+			w = {
+				name = "Window",
+				v = { ":vsplit<cr>", "Split Vertically" },
+				H = { ":split<cr>", "Split Horizontally" },
+				j = { "<C-w>j", "Move to below window" },
+				k = { "<C-w>k", "Move to above window" },
+				h = { "<C-w>h", "Move to left window" },
+				l = { "<C-w>l", "Move to right window" },
+			},
 
-      Ec = { ":e ~/.config/nvim<cr>", "Edit Configs" },
+			-- Lsp Stuffs
+			l = {
+				name = "LSP",
+				i = { ":LspInfo<cr>", "Connected Language Servers" },
+				f = { vim.lsp.buf.format, "Format code" },
+				k = { vim.lsp.buf.signature_help, "Signature Help" },
+				K = { vim.lsp.buf.hover, "Hover Commands" },
+				w = { vim.lsp.buf.add_workspace_folder, "Add Workspace Folder" },
+				W = { vim.lsp.buf.remove_workspace_folder, "Remove Workspace Folder" },
+				l = {
+					"<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>",
+					"List Workspace Folders",
+				},
+				t = { vim.lsp.buf.type_definition, "Type Definition" },
+				d = { vim.lsp.buf.definition, "Go To Definition" },
+				D = { vim.lsp.buf.declaration, "Go To Declaration" },
+				R = { vim.lsp.buf.references, "References" },
+				r = { vim.lsp.buf.rename, "Rename" },
+				a = { vim.lsp.buf.code_action, "Code Action" },
+				e = { vim.diagnostic.show, "Show Line Diagnostics" },
+				n = { vim.diagnostic.goto_next, "Go To Next Diagnostic" },
+				p = { vim.diagnostic.goto_prev, "Go To Previous Diagnostic" },
+			},
 
-      -- NvimTree
-      e = {
-        name = "NvimTree",
-        e = { ":NvimTreeToggle<cr>", "NvimTreeToggle" },
-        f = { ":NvimTreeFocus<cr>", "NvimTreeFocus" },
-        h = { ":e ~/<cr>", "NvimTreeHome" },
-      },
-      -- Telescope
-      f = {
-        name = "Telescope",
-        f = { ":Telescope find_files theme=ivy<cr>", "Telescope find_files" },
-        w = { ":Telescope current_buffer_fuzzy_find theme=ivy<cr>", "Fuzzy Find in File" },
-        o = { ":Telescope oldfiles theme=ivy<cr>", "Telescope oldfiles" },
-        g = { ":Telescope live_grep theme=ivy<cr>", "Telescope live_grep" },
-        r = { ":Telescope resume theme=ivy<cr>", "Telescope resume" },
-        b = { ":Telescope buffers theme=ivy<cr>", "Telescope buffers" },
-      },
-      -- Split
-      p = {
-        name = "Split",
-        v = { ":vsplit<cr>", "Split Vertically" },
-        h = { ":split<cr>", "Split Vertically" },
-      },
+			r = {
+        name = "Code runner",
+				r = { ":RunCode<cr>", "Open code runner" },
+				c = { ":RunClose<cr>", "Close code runner" },
+			},
+		}
 
-      -- Lsp Stuffs
-      l = {
-        name = "LSP",
-        i = { ":LspInfo<cr>", "Connected Language Servers" },
-        f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format code" },
-        k = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
-        K = { "<cmd>lua vim.lsp.buf.hover<cr>", "Hover Commands" },
-        w = { "<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>", "Add Workspace Folder" },
-        W = { "<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>", "Remove Workspace Folder" },
-        l = {
-          "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>",
-          "List Workspace Folders",
-        },
-        t = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Type Definition" },
-        d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go To Definition" },
-        D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go To Declaration" },
-        R = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
-        r = { vim.lsp.buf.rename, "Rename" },
-        a = { vim.lsp.buf.code_action, "Code Action" },
-        e = { vim.diagnostic.show, "Show Line Diagnostics" },
-        n = { vim.diagnostic.goto_next, "Go To Next Diagnostic" },
-        p = { vim.diagnostic.goto_prev, "Go To Previous Diagnostic" },
-      },
-
-      r = {
-        r = { ":RunCode<cr>", "Open code runner" },
-        c = { ":RunClose<cr>", "Close code runner" },
-      },
-    }
-
-    local opts = { prefix = "<leader>" }
-    wk.register(mappings, opts)
-  end,
+		local opts = { prefix = "<leader>" }
+		wk.register(mappings, opts)
+	end,
 }
