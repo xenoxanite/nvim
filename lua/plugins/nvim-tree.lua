@@ -12,10 +12,10 @@ return {
         enable = true,
       },
       view = {
-        width = 35,
+        width = 40,
         side = "right",
-        number = true,
-        relativenumber = true,
+        number = false,
+        relativenumber = false,
       },
 
       filters = {
