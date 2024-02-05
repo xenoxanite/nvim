@@ -66,4 +66,4 @@ local gruvbox = {
 	end,
 }
 
-return gruvbox
+return catppuccin
