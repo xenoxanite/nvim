@@ -12,7 +12,7 @@ return {
         enable = true,
       },
       view = {
-        width = 35,
+        width = 25,
         side = "right",
         number = false,
         relativenumber = false,
