@@ -22,5 +22,9 @@ return {
   {
     "mg979/vim-visual-multi",
     "norcalli/nvim-colorizer.lua",
+    "andweeb/presence.nvim",
+    config = function()
+      require("presence").setup()
+    end,
   },
 }

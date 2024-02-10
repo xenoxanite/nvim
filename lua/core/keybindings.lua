@@ -27,7 +27,6 @@ keymap("v", ">", ">gv", { noremap = true, silent = false })
 
 -- basic controll
 keymap("n", "<C-s>", ":write<cr>", opts)
-keymap("n", "<C-e>", ":Explore<cr>", opts)
 
 -- clear search highlight
 keymap("n", "<leader>nh", ":nohlsearch<cr>", opts)
